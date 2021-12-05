@@ -68,8 +68,20 @@ body {
 }
 
 .photo {
-  padding-top: 5px;
+  padding-top: 10px;
   padding-left: 45px;
   width: 200px;
   height: 200px;
+}
+.content {
+  margin-left: 300px;
+  padding-left: 20px;
+  padding-top: 30px;
+  background-color: #003147;
+}
+h1 {
+  font-size: 50px;
+  margin-left: 300px;
+  padding-left: 20px;
+  padding-top: 10px;
 }
