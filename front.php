@@ -17,12 +17,19 @@
 <body>
 
 
-	<div class="signup-form ">
+	<div class="signup-form" style="float:right;">
 
 		<form name="RegForm" action="project4.html" onsubmit="" method="post">
+			<div style="float: right;margin-top: 7cm;">
+				<div class="text-center head">
+					<p>E-BARANGAY :</p>
+					<p style="margin-top: -.22in;">AN ELECTRONIC INFORMATION</p>
+					<p style="margin-top: -.22in;">MANAGEMENT SYSTEM</p>
+				</div>
+				<div>
+					</h5>Please Log-In<h5>
 
-			<div style="float: right;margin-top: 6cm;">
-				<div class="text-center head">We are excited to see you!</div>
+				</div>
 
 				<div class="form-group margintop1">
 					<div class="input-group ">
@@ -31,7 +38,7 @@
 								<span class="fa fa-user"></span>
 							</span>
 						</div>
-						<input type="number" class="form-control" name="studentnumber" placeholder="Student Number">
+						<input type="text" class="form-control" name="username" placeholder="Username">
 					</div>
 				</div>
 				<div class="form-group">
@@ -44,20 +51,10 @@
 						<input type="password" class="form-control" name="password" placeholder="Password">
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-				</div>
 				<div class="form-group text-center ">
 					<button type="submit" class="btn btn-primary ">Sign In</button>
-				</div>
-				<div class="text-center"><a href="">Forgot Password?</a></div>
 		</form>
 
-		<div class="form-group text-center margintop1">
-			<hr style="margin-left: .1cm; width: 100%; height:2px;border-width:0;color:gray;background-color:gray">
-
-			<button type="submit" class="btn btn-primary ">Create New Account</button>
-		</div>
 
 	</div>
 
