@@ -4,16 +4,17 @@
 }
 body {
   overflow-x: hidden;
+  background-color: rgb(233, 233, 233);
 }
 .container {
-  position: relative;
+  position: absolute;
   width: 100%;
 }
 .navigation {
   position: fixed;
   width: 300px;
   height: 100%;
-  background: #003147;
+  background: #242e42;
   transition: 0.5s;
   overflow: hidden;
 }
@@ -30,7 +31,7 @@ body {
   list-style: none;
 }
 .navigation ul li:hover {
-  background: #03a9f4;
+  background: #1d2636;
 }
 .navigation ul li:nth-child(1) {
   margin-bottom: 20px;
@@ -77,11 +78,110 @@ body {
   margin-left: 300px;
   padding-left: 20px;
   padding-top: 30px;
-  background-color: #003147;
+  background-color: #1d2636;
+  font-family: sans-serif;
 }
 h1 {
   font-size: 50px;
   margin-left: 300px;
   padding-left: 20px;
   padding-top: 10px;
+}
+.welcome {
+  font-size: 32px;
+  margin-left: 9cm;
+  margin-top: 0.2cm;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.image {
+  margin: 0.2cm;
+  float: left;
+}
+.address {
+  margin-left: 9cm;
+  margin-bottom: 0.2cm;
+  font-style: oblique;
+  font-size: 17px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.address1 {
+  margin: 0.5cm;
+}
+.box {
+  background-color: white;
+  position: absolute;
+  height: 5cm;
+  width: 17cm;
+  left: 13.2in;
+  top: 2cm;
+  border-radius: 5px;
+}
+.box1 {
+  background-color: white;
+  position: absolute;
+  height: 5cm;
+  width: 8.4cm;
+  left: 13.2in;
+  top: 7.2cm;
+  border-radius: 5px;
+}
+.box2 {
+  background-color: white;
+  position: absolute;
+  height: 5cm;
+  width: 8.4cm;
+  left: 16.6in;
+  top: 7.2cm;
+  border-radius: 5px;
+}
+.box3 {
+  background-color: white;
+  position: absolute;
+  height: 5cm;
+  width: 8.4cm;
+  left: 13.2in;
+  top: 12.4cm;
+  border-radius: 5px;
+}
+.box4 {
+  background-color: white;
+  position: absolute;
+  height: 7cm;
+  width: 17cm;
+  left: 13.2in;
+  top: 18cm;
+  border-radius: 5px;
+}
+.box5 {
+  background-color: white;
+  position: absolute;
+  height: 20.5cm;
+  width: 24.7cm;
+  left: 3.3in;
+  top: 4.5cm;
+  border-radius: 5px;
+}
+.cr {
+  background-color: rgb(73, 73, 71);
+  font-size: 28px;
+}
+.texttitle {
+  font-size: 22px;
+  color: #1d2636;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin: 0.2cm;
+}
+.prq {
+  height: auto;
+  width: auto;
+}
+.card {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4);
 }
