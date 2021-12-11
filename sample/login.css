@@ -1,6 +1,7 @@
 body {
-  background: #003147;
+  background-image: url(assets/img/BARANGAY-HALL.jpg);
   font-family: "Roboto", sans-serif;
+  background-size: 2000px;
 }
 
 .login-box {
