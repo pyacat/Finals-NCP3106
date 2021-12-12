@@ -178,10 +178,3 @@ h1 {
   height: auto;
   width: auto;
 }
-.card {
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(4);
-}
