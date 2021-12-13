@@ -17,6 +17,7 @@ body {
   background: #242e42;
   transition: 0.5s;
   overflow: hidden;
+  float: left;
 }
 
 .navigation ul {
@@ -86,6 +87,9 @@ h1 {
   margin-left: 300px;
   padding-left: 20px;
   padding-top: 10px;
+}
+h2 {
+  font-family: sans-serif;
 }
 .welcome {
   font-size: 32px;
@@ -177,4 +181,145 @@ h1 {
 .prq {
   height: auto;
   width: auto;
+}
+.restitle {
+  font-size: 28px;
+  font-family: sans-serif;
+  margin-left: 9cm;
+  margin-top: 0.5cm;
+  font-weight: bold;
+  float: left;
+}
+
+.topnav {
+  overflow: hidden;
+  width: 50cm;
+  background-color: #e9e9e9;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #2196f3;
+  color: white;
+}
+
+.topnav input[type="text"] {
+  float: left;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 29cm;
+  border-color: #1d2636;
+  border-radius: 5px;
+  width: 12cm;
+  font-size: 17px;
+}
+.buttonnew {
+  float: right;
+  height: 1cm;
+  font-size: 17px;
+  margin-top: -2.8cm;
+  padding: 6px;
+  margin-right: 1.3cm;
+  font-family: sans-serif;
+  border-radius: 5px;
+  background-color: #2196f3;
+  border-color: #2196f3;
+}
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 17px;
+  color: #545658;
+  font-family: monospace;
+  font-size: 18px;
+  margin-top: 0.7in;
+}
+th {
+  color: #4e4c4c;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 5in;
+  height: 5in;
+  border-radius: 10px;
+  background-color: #677189;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+label {
+  font-size: 15px;
+  font-family: sans-serif;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #fff8f8;
+}
+.fill {
+  width: 50%;
+  height: 0.7cm;
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 7px;
+  border-color: gray;
+}
+.modalbutton {
+  background-color: #2196f3;
+  border-style: solid;
+  border-color: #2196f3;
+  height: 1cm;
+  width: 2cm;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+hr {
+  width: 100%;
+  margin: 2px;
 }
