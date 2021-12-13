@@ -11,7 +11,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 
 //READ//
-$firstname = $familyname = $middlename = $gender  = $purpose = $birthdate  = $civilstatus = "";
+$firstname = $familyname = $middlename = $gender  = $purpose = $birthdate  = $civilstatus =  "";
 
 require_once "config.php";
 
@@ -29,11 +29,34 @@ $familyname = $row["lastName"];
 $firstname = $row["firstName"];
 $middlename = $row["middleName"];
 $gender = $row["sex"];
-$purpose = $row["purpose"];
+// $purpose = $row["purpose"];
 $birthdate =  $row["birthDate"];
 $civilstatus = $row["civilStatus"];
 
 // END READ //
+
+// PURPOSE
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+$purpose = trim($_POST["purpose"]);
+
+
+$updateSql = "UPDATE login SET purpose=? WHERE id=?";
+if ($updateStmt = $mysqli->prepare($updateSql)) {
+$updateStmt->bind_param("si", $purpose, $_SESSION["id"]);
+
+if ($updateStmt->execute()) {
+header("location: sample1.php");
+} else {
+header("location: practice.php");
+}
+}
+$updateStmt->close();
+}
+$mysqli->close();
+
+// END PURPOSE
 
 ?>
 
@@ -58,11 +81,7 @@ $civilstatus = $row["civilStatus"];
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script>
-    function barangayclear() {
-        location.href = "barangayClearance.php";
-    }
-    </script>
+
 
 </head>
 
@@ -130,8 +149,7 @@ $civilstatus = $row["civilStatus"];
                     <span class="input-group-addon">
                         <i class="fa fa-check"></i>
                     </span>
-                    <input type="tel" class="form-control" name="purpose" placeholder="Purpose"
-                        value="<?= $purpose ?>" />
+                    <input type="text" class="form-control" name="purpose" placeholder="Purpose" />
                 </div>
             </div>
 
@@ -142,35 +160,10 @@ $civilstatus = $row["civilStatus"];
             <div class="form-group" style="margin-left: 15px;">
                 <div class="row">
                     <div class="col">
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                        <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal"
                             data-target="#exampleModalCenter2">
                             Generate Report
                         </button>
-
-                        <!-- Modal -->
-                        <div class=" modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title " id="exampleModalLongTitle">Update</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Barangay Clearance Successfully created
-                                    </div>
-                                    <div class="modal-footer">
-
-
-                                        <button type="button" onclick="barangayclear()"
-                                            class="btn btn-primary">OKAY</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
 
 
                     </div>

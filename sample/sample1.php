@@ -11,7 +11,7 @@ if($conn->connect_error){
 }
 
 //READ//
-$firstname = $familyname = $middlename = $gender  = $purpose = $birthdate  = $civilstatus = "";
+$firstname = $familyname = $middlename = $gender  = $purpose = $birthdate  = $civilstatus = $nationality = "";
 
 require_once "config.php";
 
@@ -29,24 +29,13 @@ $familyname = $row["lastName"];
 $firstname = $row["firstName"];
 $middlename = $row["middleName"];
 $gender = $row["sex"];
-// $purpose = $row["purpose"];
+$purpose = $row["purpose"];
 $birthdate =  $row["birthDate"];
 $civilstatus = $row["civilStatus"];
+$nationality = $row["nationality"];
 
 // END READ //
 
-
-$pdf = new FPDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial','B',14);
-
-$pdf->Cell(30,10,$familyname,);
-$pdf->Cell(50,10,$firstname,);
-$pdf->Cell(80,10,$middlename,);
-$pdf->Cell(40,10,$gender,);
-$pdf->Ln();
-
-$pdf->Output();
 
 
 
@@ -95,7 +84,29 @@ function Header()
     // Title
     $this->Cell(30,-3,'BARANGAY CLEARANCE');
     // Line break
+    $this->Ln(20);
+
+
+    // Arial bold 15
+    $this->SetFont('Arial','',10);
+    // Move to the right
+    $this->Cell(55);
+    // Title
+    $this->Cell(70,-3,'This is to certify');
+    // Line break
+     $this->Cell(20,-3,'is of legal age,');
     $this->Ln(12);
+    $this->Cell(40);
+    $this->Cell(1,-20,'and a bonafied residence of Barangay Moonwalk and that has no derogatary ');
+
+    $this->Ln(8);
+    $this->Cell(40);
+    $this->Cell(1,-29,'records in Barangay prior to the date of issuance of this certificate.');
+
+    $this->Ln(8);
+    $this->Cell(40);
+    $this->Cell(1,-29,'This certificate is issued in his/her request for:');
+
 
 }
 
@@ -121,7 +132,15 @@ function Footer()
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
-$pdf->SetFont('Times','',12);
+$pdf->SetFont('Times','I',12);
+$pdf->Cell(40);
+$pdf->Cell(17,-60,$familyname,);
+$pdf->Cell(12,-60,$firstname,);
+$pdf->Cell(39,-60,$middlename,);
+$pdf->Cell(12,-60,$nationality,);
+$pdf->Cell(-100);
+$pdf->Cell(12,8,$purpose,);
+$pdf->Ln();
 
 $pdf->Output();
 ?>

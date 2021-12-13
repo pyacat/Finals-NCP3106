@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $_SESSION["id"] = $id;
               $_SESSION["username"] = $username;
 
-              header("location: practice.php");
+              header("location: Dashboard.html");
             } else {
               $login_err = "Invalid username or password.";
             }
