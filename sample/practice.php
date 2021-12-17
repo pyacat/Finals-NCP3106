@@ -11,51 +11,64 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 
 //READ//
-$firstname = $familyname = $middlename = $gender  = $purpose = $birthdate  = $civilstatus =  "";
 
+$firstname = $familyname = $middlename = $gender  = $purpose = $birthdate  = $civilstatus =  "";
+$purpose_err = "";
 require_once "config.php";
 
-$sql = "SELECT * FROM login WHERE id = ?";
+
+
+$sql = "SELECT * FROM barangay WHERE id = ?";
 
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("i", $_SESSION["id"]);
+$stmt->bind_param("i", $_GET["id"]);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
-$id = $_SESSION["id"];
+$id = $_GET["id"];
 
-$familyname = $row["lastName"];
-$firstname = $row["firstName"];
-$middlename = $row["middleName"];
-$gender = $row["sex"];
-// $purpose = $row["purpose"];
-$birthdate =  $row["birthDate"];
-$civilstatus = $row["civilStatus"];
+$familyname = $row["lastname"];
+$firstname = $row["firstname"];
+$middlename = $row["middlename"];
+$gender = $row["gender"];
+$purpose = $row["purpose"];
+$birthdate =  $row["birthdate"];
+$civilstatus = $row["civilstatus"];
 
 // END READ //
 
 // PURPOSE
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
-$purpose = trim($_POST["purpose"]);
+    $purpose = trim($_POST["id"]);
+    $id = $_POST["id"];
 
+    $input_purpose = trim($_POST["purpose"]);
+    if (empty($input_purpose)) {
+        $purpose_err = "Please enter a name.";
+    } else {
+        $purpose = $input_purpose;
+    }
+    if (empty($purpose_err)) {
 
-$updateSql = "UPDATE login SET purpose=? WHERE id=?";
-if ($updateStmt = $mysqli->prepare($updateSql)) {
-$updateStmt->bind_param("si", $purpose, $_SESSION["id"]);
+        $updateSql = "UPDATE barangay SET purpose=? WHERE id=?";
+        if ($updateStmt = $mysqli->prepare($updateSql)) {
+            $updateStmt->bind_param("si", $param_purpose, $param_id);
+            $param_purpose = $purpose;
+            $param_id = $id;
 
-if ($updateStmt->execute()) {
-header("location: sample1.php");
-} else {
-header("location: practice.php");
+            if ($updateStmt->execute()) {
+                header("location: barangayClearance.php");
+            } else {
+                header("location: practice.php");
+            }
+        }
+        $updateStmt->close();
+    }
+    $mysqli->close();
 }
-}
-$updateStmt->close();
-}
-$mysqli->close();
-
 // END PURPOSE
 
 ?>
@@ -75,7 +88,11 @@ $mysqli->close();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="regform.css" />
-
+    <script>
+        function residency() {
+            location.href = "certificateOfResidency.php";
+        }
+    </script>
 
 
 
@@ -88,22 +105,20 @@ $mysqli->close();
 <body style="background-image: url('189581.png');">
     <div class="signup-form">
         <form name="regform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <h2>Welcome!</h2>
+            <h2>Certificate Issuance</h2>
             <p>These are your information:</p>
             <hr />
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"></i></span>
-                    <input type="text" class="form-control" pattern="[A-Za-z]+" name="familyname"
-                        placeholder="Family Name" value="<?= $familyname ?>" disabled />
+                    <input type="text" class="form-control" pattern="[A-Za-z]+" name="familyname" placeholder="Family Name" value="<?= $familyname ?>" disabled />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"></i></span>
-                    <input type="text" class="form-control" pattern="[A-Za-z]+" name="firstname"
-                        placeholder="First Name" value="<?= $firstname ?>" disabled />
+                    <input type="text" class="form-control" pattern="[A-Za-z]+" name="firstname" placeholder="First Name" value="<?= $firstname ?>" disabled />
                 </div>
             </div>
 
@@ -111,16 +126,14 @@ $mysqli->close();
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <input type="email" class="form-control" name="middlename" placeholder="Middle Name"
-                        value="<?= $middlename ?>" disabled />
+                    <input type="email" class="form-control" name="middlename" placeholder="Middle Name" value="<?= $middlename ?>" disabled />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <input type="numbers" class="form-control" name="gender" placeholder="Gender" value="<?= $gender ?>"
-                        disabled />
+                    <input type="numbers" class="form-control" name="gender" placeholder="Gender" value="<?= $gender ?>" disabled />
                 </div>
                 <p>
                 </p>
@@ -136,8 +149,7 @@ $mysqli->close();
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <input type="numbers" class="form-control" name="civilstatus" placeholder="Civil Status"
-                        value="<?= $civilstatus ?>" disabled />
+                    <input type="numbers" class="form-control" name="civilstatus" placeholder="Civil Status" value="<?= $civilstatus ?>" disabled />
                 </div>
                 <p>
                 </p>
@@ -149,7 +161,7 @@ $mysqli->close();
                     <span class="input-group-addon">
                         <i class="fa fa-check"></i>
                     </span>
-                    <input type="text" class="form-control" name="purpose" placeholder="Purpose" />
+                    <input type="text" class="form-control" name="purpose" placeholder="Purpose" value="<?= $purpose ?>" />
                 </div>
             </div>
 
@@ -157,46 +169,23 @@ $mysqli->close();
 
 
 
-            <div class="form-group" style="margin-left: 15px;">
+            <div class=" form-group" style="margin-left: 15px;">
                 <div class="row">
                     <div class="col">
-                        <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal"
-                            data-target="#exampleModalCenter2">
-                            Generate Report
+                        <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter2">
+                            Clearance
                         </button>
 
 
                     </div>
 
-
+                    <input type="hidden" name="id" value="<?php echo $id; ?>" />
                     <div class="col" style="float: right; margin-top: -40px; margin-right: 15px;">
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
-                            data-target="#exampleModalCenter1">
-                            Delete
+                        <button type="button" onclick="residency()" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter1">
+                            Residency
                         </button>
 
-                        <!-- Modal -->
-                        <div class=" modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title " id="exampleModalLongTitle">Delete</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete your account?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="button" onclick="delete1()" class="btn btn-primary">Yes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
 
                     </div>

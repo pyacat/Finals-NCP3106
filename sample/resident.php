@@ -1,3 +1,41 @@
+<?php
+$lastname = $firstname = $middlename = $alias = $purok = $gender = $civilstatus = $birthdate = $dateofregistration = $birthplace = $contactnumber = $emailaddress = $voterstatus = $religion = $occupation = $nationality = "";
+
+// Include config file
+require_once "config.php";
+if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
+    $sql = "SELECT * FROM barangay WHERE id = ?";
+
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $_GET["id"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    $id = $_GET["id"];
+
+    // Retrieve indeividual fild value
+
+    $lastname = $row["lastname"];
+    $firstname = $row["firstname"];
+    $middlename = $row["middlename"];
+    $alias = $row["alias"];
+    $purok = $row["purok"];
+    $gender = $row["gender"];
+    $civilstatus = $row["civilstatus"];
+    $birthdate = $row["birthdate"];
+    $dateofregistration = $row["dateofregistration"];
+    $birthplace = $row["birthplace"];
+    $contactnumber = $row["contactnumber"];
+    $emailaddress = $row["emailaddress"];
+    $voterstatus = $row["voterstatus"];
+    $nationality = $row["nationality"];
+    $religion = $row["religion"];
+    $occupation = $row["occupation"];
+}
+// Prepare a select statement
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +49,8 @@
 
 </head>
 
+
+
 <body>
     <div class="container">
         <div class="navigation">
@@ -19,173 +59,125 @@
                     <span><img class="photo" src="map.png" /></span>
                 </a>
                 <li>
-                    <a href="Dashboard.html">
+                    <a href="Dashboard.php">
                         <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="information.html">
-                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span class="title">Barangay Information</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="ResidentInfo.html">
+                    <a href="resident.php">
                         <span class="icon"><i class="fa fa-address-book-o" aria-hidden="true"></i></span>
                         <span class="title">Resident Information</span>
                     </a>
                 </li>
                 <li>
-                    <a href="BlotterRecord.html">
-                        <span class="icon"><i class="fa fa-folder" aria-hidden="true"></i></span>
-                        <span class="title">Blotter Records</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="SettlementSched.html">
-                        <span class="icon"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-                        <span class="title">Settlement Schedules</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="CertificateIssu.html">
-                        <span class="icon"><i class="fa fa-certificate" aria-hidden="true"></i></span>
-                        <span class="title">Certificate Issuance</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Accounts.html">
+                    <a href="Accounts.php">
                         <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
                         <span class="title">Accounts</span>
                     </a>
                 </li>
                 <li>
-                    <a href="BarangayConfig.html">
+                    <a href="website.html">
                         <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                        <span class="title">Barangay Config</span>
+                        <span class="title">Barangay Website</span>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
+
     <div class="restitle">
         <p>Resident Information Management</p>
-        <div class="topnav">
-            <input type="text" placeholder="Search..">
+
+        <div class="topnav boxinfo">
+            <input type="text" placeholder="Search...">
+            <button type="button" class="pull-right form-group text-center" style="margin-top: -20px; border-color: #1d2636; background-color:#2196f3;border-radius:5%;"><a href="newresident.php" style="text-decoration: none;color:#fff;"> + New Resident </a></button>
 
             <table>
+
                 <tr>
-                    <th>Action</th>
-                    <th>Resident ID</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Alias</th>
-                    <th>Gender</th>
-                    <th>Birthdate</th>
-                    <th>Birthplace</th>
-                    <th>Civil Status</th>
-                    <th>Voter Status</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Resident ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Middle Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Alias</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Birthdate</th>
+                    <th scope="col">Birthplace</th>
+                    <th scope="col">Civil Status</th>
+                    <th scope="col">Voter Status</th>
                 </tr>
 
                 <?php
                 $conn = mysqli_connect("localhost", "root", "", "database");
-                $sql = "SELECT * from game";
+                $sql = "SELECT * from barangay ORDER BY id asc";
                 $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr><td>" . $row['id'] . "</td><td>" . $row['username'] . "</td><tr>";
-                    }
-                }
-                $conn->close();
                 ?>
+                <tbody>
 
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) { ?>
+
+                            <tr>
+                                <td>
+
+                                    <a href="read.php ?read= <?php echo $row['id'] ?>"> <button style="width:.5in;height:.3in;background-color:#28a745;border-radius:5px;" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></button></a>
+                                    <a href="update.php?update=<?php echo $row['id'] ?>"> <button style="width:.5in;height:.3in;background-color:#007bff;border-radius:5px;" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></button></a>
+                                    <a href="deleteinfo.php?delete=<?php echo $row['id'] ?>"><button style="width:.5in;height:.3in;background-color:#dc3545;border-radius:5px;" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></button></a>
+                                    <a href="practice.php?id=<?php echo $row['id'] ?>"><button style="width:.5in;height:.3in;background-color:#ffc107;border-radius:5px;" title="Certificate Issuance Record" data-toggle="tooltip"><span class="fa fa-print"></span></button></a>
+
+                                </td>
+
+
+
+
+                                <td> <?php echo $row['id'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo  $row['lastname'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo  $row['middlename'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo  $row['firstname'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo  $row['alias'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo  $row['gender'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo  $row['birthdate'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo  $row['birthplace'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo  $row['civilstatus'] ?>
+                                    <hr>
+                                </td>
+                                <td> <?php echo $row['voterstatus'] ?>
+                                    <hr>
+                                </td>
+
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                </tbody>
 
             </table>
-            <hr style="margin-left: .4cm; width: 80%; height:5px;border-width:0;color:gray;background-color:gray">
+            <hr style="margin-left: 20px;width: 100%; height:5px;border-width:0;color:gray;background-color:gray">
 
         </div>
     </div>
     </div>
 
-    <!-- Trigger/Open The Modal -->
-    <button class="buttonnew" id="myBtn">+ New Resident</button>
-
-    <!-- The Modal -->
-    <form action="insert.php" method="POST">
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    <h2>New Resident Information</h2>
-                    <hr>
-
-                    <div class="form-group">
-                        <label>First Name:</label>
-                        <div>
-                            <input type="text" name="username" class="fill">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Middle Name:</label>
-                        <div>
-                            <input type="text" name="username" class="fill">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name:</label>
-                        <div>
-                            <input type="text" name="username" class="fill">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Alias:</label>
-                        <div>
-                            <input type="text" name="username" class="fill">
-                        </div>
-                    </div>
-
-
-                    <div class="modal-footer">
-                        <button type="button" class="modalbutton" data-dismiss="span">Close</button>
-                        <button type="submit" name="insert" class="modalbutton">Save</button>
-                    </div>
-                </div>
-            </div>
-    </form>
-    </div>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 
 
 </body>

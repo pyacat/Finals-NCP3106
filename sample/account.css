@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  overflow-x: hidden;
+  background-color: rgb(233, 233, 233);
+}
+.container {
+  position: absolute;
+  width: 100%;
+}
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: #242e42;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+}
+.navigation ul li:hover {
+  background: #1d2636;
+}
+.navigation ul li:nth-child(1) {
+  margin-bottom: 20px;
+}
+.navigation ul li:nth-child(1)hover {
+  background: transparent;
+}
+.navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+}
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+.navigation ul li a .icon .fa {
+  color: #fff;
+  font-size: 24px;
+}
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  white-space: nowrap;
+}
+
+.photo {
+  padding-top: 10px;
+  padding-left: 45px;
+  width: 200px;
+  height: 200px;
+}
+.accountContainer {
+  width: calc(100%-300px);
+  height: 100vh;
+  margin-left: 300px;
+}
+.accountTitle {
+  font-size: 30px;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+.barangay-official {
+  margin-top: 50px;
+}
+.account-content-container1 div {
+  width: 45%;
+  display: inline-block;
+  padding: 30px;
+}
+.prologue p {
+  margin-top: 20px;
+}
+.barangay-logo img {
+  margin-bottom: -25px;
+}
+.barangay-official div {
+  width: auto;
+  padding: 30px 60px;
+  margin: 0 20px;
+  box-shadow: 0px 0px 3px #000;
+  border-radius: 10px;
+}
+.barangay-official p,
+.barangay-official h3 {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+.barangay-official img {
+  width: 200px;
+  border-radius: 10px;
+}
+.button-container {
+  border-top: 2px solid #ddd;
+  width: 100%;
+  margin-top: 50px;
+  padding: 50px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-container button {
+  padding: 20px 50px;
+  margin: 0 20px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: #dc3545;
+}
+.button-container button:nth-child(1) {
+  background-color: #007bff;
+}
+
+/* MODAL */
+
+.change-password {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999999999;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.change-password-dialogbox {
+  height: 400px;
+  width: 600px;
+  background: #fff;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
